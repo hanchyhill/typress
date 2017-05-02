@@ -1,0 +1,38 @@
+{
+  "status":1,
+  "result":{
+    "TClist":[
+    	{"date":"09"
+			,"timeUTC":"2016-08-30T00:00:00.000Z"
+		,"hour":"02"
+		,"rankEN":"TS"
+		,"ID":"0112"
+		,"TCinfo":"TS 0112(0113 MAX)"
+		,"pressure":998
+		,"lat":11.5
+		,"lon":120
+		,"locationEN":"SOUTHERN SOUTH CHINA SEA"
+		,"locationCN":"南海南部海面"
+		,"trend":"强度加强"
+		,"moveDir":"西北"
+    ,"speedKMH":20
+		,"speedKTS":10}
+		,
+    	{"date":"10"
+		,"timeUTC":"2016-08-27T00:00:00.000Z"
+		,"hour":"08"
+		,"rankEN":"STS"
+		,"ID":"0115"
+		,"TCinfo":"TS 0112(0113 MAX)"
+		,"pressure":980
+		,"lat":5
+		,"lon":130
+		,"locationEN":"SOUTHERN SOUTH CHINA SEA"
+		,"locationCN":"南海南部海面"
+		,"trend":"强度加强"
+		,"moveDir":"西北西"
+    ,"speedKMH":15
+		,"speedKTS":8}
+    ]
+  } 
+}

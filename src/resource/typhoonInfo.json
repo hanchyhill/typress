@@ -1,0 +1,66 @@
+{
+  "status":1,
+  "result":{
+    "TCRankList" : [
+      {"en":"LOW PRESSURE AREA","cn":"低压区"}
+      ,{"en":"TD","cn":"热带低压"}
+      ,{"en":"TS","cn":"热带风暴"}
+      ,{"en":"STS","cn":"强热带风暴"}
+      ,{"en":"TY","cn":"台风"}
+      ,{"en":"STY","cn":"强台风"}
+      ,{"en":"SUPER TY","cn":"超强台风"}
+  ],
+    "region":[
+      {"en":"NORTHERN SOUTH CHINA SEA","cn":"南海北部海面"}
+      ,{"en":"CENTRAL SOUTH CHINA SEA","cn":"南海中部海面"}
+      ,{"en":"SOUTHERN SOUTH CHINA SEA","cn":"南海南部海面"}
+      ,{"en":"TAIWAN","cn":"台湾岛","sp":true}
+      ,{"en":"TAIWAN STRAIT","cn":"台湾海峡"}
+      ,{"en":"BASHI CHANNEL","cn":"巴士海峡"}
+      ,{"en":"SEA TO EAST OF TAIWAN","cn":"台湾以东海面"}
+      ,{"en":"SEA TO NORTHEASTERN THE PHILIPPINES","cn":"菲律宾东北部海面"}
+      ,{"en":"SEA TO EAST OF THE PHILIPPINES","cn":"菲律宾以东海面"}
+      ,{"en":"SEA NEARBY THE SOUTHERN PHILIPPINES","cn":"菲律宾南部附近海面"}
+      ,{"en":"OCEAN TO EAST OF THE SOUTHERN PHILIPPINES","cn":"菲律宾南部以东海面"}
+      ,{"en":"PHILIPPINES","cn":"菲律宾群岛"}
+      ,{"en":"SEA TO WEST OF GUAM","cn":"关岛以西海面"}
+      ,{"en":"SEA NEAR GUAM","cn":"关岛附近海面"}
+      ,{"en":"RYUKYU","cn":"琉球群岛海面"}
+      ,{"en":"EAST CHINA SEA","cn":"东海附近海面"}
+      ,{"en":"GUANGDONG","cn":"广东省","sp":true}
+      ,{"en":"FUJIAN","cn":"福建省","sp":true}      
+      ,{"en":"BEIBU GULF","cn":"北部湾"}
+      ,{"en":"HAINAN ISLAND","cn":"海南岛","sp":true}
+      ,{"en":"QIONGZHOU STRAIT","cn":"琼州海峡"}
+      ,{"en":"EAST CHINA SEA ","cn":"东海"}
+      ,{"en":"YELLOW SEA","cn":"黄海"}
+    ]
+    ,"trendList" : [
+      {"en":"NORTHERN SOUTH CHINA SEA","cn":"强度加强"}
+      ,{"en":"CENTRAL SOUTH CHINA SEA","cn":"强度不加强"}
+      ,{"en":"SOUTHERN SOUTH CHINA SEA","cn":"强度维持"}
+      ,{"en":"SOUTHERN SOUTH CHINA SEA","cn":"趋于减弱"}
+    ]
+    ,"moveDirList":[
+      {"en":"NW","cn":"西北","dir":315}
+      ,{"en":"WNW","cn":"西北西","dir":292.5}
+      ,{"en":"WLY","cn":"偏西","dir":270}
+      ,{"en":"NNW","cn":"北北西","dir":337.5}
+      ,{"en":"NLY","cn":"偏北","dir":360}
+      ,{"en":"NNE","cn":"北北东","dir":22.5}
+      ,{"en":"NE","cn":"东北","dir":45}
+      ,{"en":"ENE","cn":"东北东","dir":67.5}
+      ,{"en":"WSW","cn":"西南西","dir":247.5}
+      ,{"en":"SW","cn":"西南","dir":225}
+      ,{"en":"ELY","cn":"偏东","dir":90}
+      ,{"en":"SLY","cn":"偏南","dir":180}
+      ,{"en":"SE","cn":"东南","dir":135}
+      ,{"en":"ESE","cn":"东南东","dir":112.5}
+      ,{"en":"SSW","cn":"南南西","dir":202.5}
+      ,{"en":"SSE","cn":"南南东","dir":157.5}      
+      ,{"en":"ALMOST STATIONARY","cn":"原地摆动","dir":999}     
+    ]
+      
+  }
+
+}
