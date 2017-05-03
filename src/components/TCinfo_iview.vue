@@ -104,6 +104,14 @@
           </el-option>
         </el-select>
       </el-col>
+      <el-col :span="9">
+       Refer detail  
+        <el-switch
+        v-model="detail"
+        on-color="#13ce66"
+        size="small">
+        </el-switch>
+      </el-col>
     </el-row>
     <el-row class="list03">
       <el-col :span="5">
@@ -154,9 +162,20 @@
         </span>
         </Tooltip>
       </el-col>
+      <el-col :span="2">
+        <el-input  v-model="cName" size="small">
+          <template slot="prepend">命名</template>
+        </el-input>
+      </el-col>
+      <el-col :span="2">
+        <el-input  v-model="eName" size="small">
+          <template slot="prepend">Name</template>
+        </el-input>
+      </el-col>
     </el-row>
     <el-row class="messageBox">
-      <el-input type="textarea" autosize placeholder="请输入内容" name="messageEN"
+      <el-input :autosize="{ minRows: 2, maxRows: 4}"
+      type="textarea" placeholder="请输入内容" name="messageEN"
       v-model="depictEN">
       </el-input>
     </el-row>
@@ -247,6 +266,7 @@
         ,selectHour:this.tcItem.hour ? this.tcItem.hour +':00': ""
         ,test:new Date(2016, 9, 10, 18, 40)
         ,selectDate:this.tcItem.timeUTC ? this.tcItem.timeUTC: ""
+        ,detail:false
         //,stylePop:{left: '0px',              right: '0px'}
         //,oldCN:""
       }
@@ -295,7 +315,8 @@
       depictEN: function() {
         let text = (this.date ? 'AT ' + this.date + '/': '') + (this.hour ? (this.hour + ':00' + ' L.T.') : '') + (this.rankEN ? ' THE ' + this.rankEN: '') + 
                    (this.ID ? ' ' + this.ID + ' ': '') + (this.eName ? '(' + this.ID + ' ' + this.eName.toUpperCase() +')': '') + 
-                   (this.pressure ? ' ' + this.pressure + 'HPA': '') + (this.locationEN ? ' OVER ' + 'THE ' + this.locationEN: '') + (this.lat ? ' WAS LOCATED NEAR ' + this.lat + 'N ': '') + (this.lon ? this.lon + 'E. ': '') + (this.moveDirEN ? 'THE MOVEMENT IS TOWARDS ' + this.moveDirEN: '') + (this.speedKTS ? ' ' + this.speedKTS + 'KTS.': '');
+                   (this.pressure ? ' ' + this.pressure + 'HPA': '') + (this.locationEN ? ' OVER ' + 'THE ' + this.locationEN: '') + (this.lat ? ' WAS LOCATED NEAR ' + this.lat + 'N ': '') + (this.lon ? this.lon + 'E. ': '') + (this.moveDirEN ? 'THE MOVEMENT IS TOWARDS ' + this.moveDirEN: '') + (this.speedKTS ? ' ' + this.speedKTS + 'KTS.': '') + 
+                   (this.detail? ' PLEASE REFER TO TC WARNING FOR DETAIL.' : '');
         return text;
       }
       ,

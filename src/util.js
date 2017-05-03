@@ -79,6 +79,7 @@ function converData(list){
     };
     let localTime = new Date(Number(finalList[index].uyear), Number(finalList[index].umonth) - 1,
      Number(finalList[index].uday), Number(finalList[index].uhour) + 8);
+    finalList[index].time = localTime.getTime();
     finalList[index].month = localTime.getMonth()+1;
     finalList[index].date = (Array(2).join('0') + localTime.getDate()).slice(-2);
     finalList[index].hour = (Array(2).join('0') + localTime.getHours()).slice(-2);

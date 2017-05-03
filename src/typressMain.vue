@@ -1,8 +1,8 @@
 <template>
 <div id="app">
   <el-row :gutter="10">
-    <el-col :span="3"><div class="grid-content"></div></el-col>
-    <el-col :span="21">
+    <el-col :span="1"><div class="grid-content"></div></el-col>
+    <el-col :span="23">
   <el-row>
     <el-col :span="23"><div class="grid-content bg-purple">
 
@@ -71,6 +71,11 @@
         label="TSENAME"
         >
       </el-table-column>
+      <el-table-column
+        prop="time"
+        label="time"
+        >
+      </el-table-column>
     </el-table>
 
     </div></el-col>
@@ -112,17 +117,29 @@ export default {
   name: 'app',
   components:{TcInfo}
 	,data:function(){
+
+    let iniTime = new Date();
+    var iniTime2 = new Date();
+    iniTime2.setTime(iniTime2.getTime() - 3600 * 1000 * 24);
+    let eTime = iniTime.getFullYear().toString() +  
+                (Array(2).join('0') + iniTime.getDate()).slice(-2) + 
+                (Array(2).join('0') + (iniTime.getMonth()+1)).slice(-2);
+    let sTime = iniTime2.getFullYear().toString() +  
+                (Array(2).join('0') + iniTime2.getDate()).slice(-2) + 
+                (Array(2).join('0') + (iniTime2.getMonth()+1)).slice(-2);
     return {
-    TClist : TClist
+    //TClist : TClist
+    TClist : []
     ,TCRankList:TCRankList
     ,region:regionList
     ,trendList : trendList
     ,moveDirList:moveDirList
     ,remoteList:[]
     ,TCinfo : []
-    ,searchRange:['2016-08-28', '2016-08-30']
-    ,startTime:'20160828'
-    ,endTime:'20160830'
+    ,searchRange:[iniTime2, iniTime]
+    ,startTime:sTime
+    ,endTime:eTime
+    ,fitTime:this.fitDate()
     ,searchTime: {
        shortcuts: [
          {
@@ -178,10 +195,18 @@ export default {
   ,methods: {
     getBasicInfo:function(){
       var _this = this;
+      
 ///////////测试用////
-      this.getTestData();
+      //this.getTestData();
 //////////////测试用结束///////////
 //业务用可链接数据库后启用//      this.getData();
+      this.getData();
+    },
+    fitDate:function(){
+      let fitTime = new Date();
+      let fitHour = 2<fitTime.getHours()<14? 2:14;
+      fitTime.setHours(fitHour,0,0,0);
+      return fitTime.getTime();
     }
     ,changeSearchTime:function(time){
       //console.log(time);
@@ -220,26 +245,48 @@ export default {
       
       var fullURL = '/fetch/getData?' + params + '&interface=getObs';
       var  _this = this;
+      this.$message({
+          message: '正在查询数据库',
+          type: 'info',
+          duration: 1000
+        });
       axios.get(fullURL)
-        .then(function (res) {
+        .then( res => {
           //console.log(res);
-          _this.remoteList = converData(res.data.DATA);
+          if(res.data.ROWCOUNT == "0") {
+            this.$notify({
+              title: 'Empty data',
+              message: '此时段未找到热带气旋信息',
+              type: 'warning',
+              duration:'3500',
+            });
+            return;
+          }
+          this.remoteList = converData(res.data.DATA);
           //console.log(_this.removeList);
           params = params + '&interface=getInfo';
           let url =  '/fetch/getData?' + params;
           axios.get(url)
-            .then(function (res) {
+            .then( res => {
               //console.log(res);
               //_this.remoteList = 
-              _this.fitTyphoon(res.data.DATA);
+              this.fitTyphoon(res.data.DATA);
+              this.$message({
+                message: '查询完成',
+                type: 'success',
+                duration: 1000
+              });
+              this.corTime();
             })
 
-            .catch(function (error) {
+            .catch(error => {
               console.log(error);
+              this.$message.error('查询出错，F12查看详情');
             });
         })
-         .catch(function (error) {
+         .catch(rror => {
             console.log(error);
+            this.$message.error('查询出错，F12查看详情');
          });
     }
     ,getTestData:function(){
@@ -261,11 +308,18 @@ export default {
             Vue.set(itemL,"TSCNAME",itemI.TSCNAME);
             Vue.set(itemL,"TSENAME",itemI.TSENAME);
             Vue.set(itemL,"ID",itemI.INTLID);
-            //itemL.TSCNAME = itemI.TSCNAME;
-            //itemL.TSENAME = itemI.TSENAME;
             }
           })
         })
+    }
+    ,corTime:function(){
+      let list = this.remoteList;
+      
+      list.forEach(item=>{
+        if(item.time == this.time){
+          this.TClist.unshift(item);
+        }
+      })
     }
 
   }
