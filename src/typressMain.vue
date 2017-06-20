@@ -71,11 +71,11 @@
         label="TSENAME"
         >
       </el-table-column>
-      <el-table-column
+      <!--<el-table-column
         prop="time"
         label="time"
         >
-      </el-table-column>
+      </el-table-column>-->
     </el-table>
 
     </div></el-col>
@@ -84,7 +84,7 @@
 <el-row>
   <el-col :span="23">
     <div class="tool_bar grid-content">
-    <el-button type="primary" title="新建描述" icon="plus" v-on:click="addNewItem('')" size="small">add</el-button>
+    <el-button type="primary" title="新建描述" icon="plus" v-on:click="addNewItem('')" size="small">添加词条</el-button>
       选择查询日期范围<span class = "time_input">
       <Date-picker @on-change="changeSearchTime" type="daterange" :options="searchTime" :value="searchRange"
       placement="bottom-end" placeholder="选择日期" style="width: 400px"></Date-picker>
@@ -122,11 +122,11 @@ export default {
     var iniTime2 = new Date();
     iniTime2.setTime(iniTime2.getTime() - 3600 * 1000 * 24);
     let eTime = iniTime.getFullYear().toString() +  
-                (Array(2).join('0') + iniTime.getDate()).slice(-2) + 
-                (Array(2).join('0') + (iniTime.getMonth()+1)).slice(-2);
+                (Array(2).join('0') + (iniTime.getMonth()+1)).slice(-2) +
+                (Array(2).join('0') + iniTime.getDate()).slice(-2);
     let sTime = iniTime2.getFullYear().toString() +  
-                (Array(2).join('0') + iniTime2.getDate()).slice(-2) + 
-                (Array(2).join('0') + (iniTime2.getMonth()+1)).slice(-2);
+                (Array(2).join('0') + (iniTime2.getMonth()+1)).slice(-2) +
+                (Array(2).join('0') + iniTime2.getDate()).slice(-2);
     return {
     //TClist : TClist
     TClist : []
@@ -204,7 +204,7 @@ export default {
     },
     fitDate:function(){
       let fitTime = new Date();
-      let fitHour = 2<fitTime.getHours()<14? 2:14;
+      let fitHour = 2<fitTime.getHours()&&fitTime.getHours()<14? 2:14;
       fitTime.setHours(fitHour,0,0,0);
       return fitTime.getTime();
     }
@@ -253,6 +253,18 @@ export default {
       axios.get(fullURL)
         .then( res => {
           //console.log(res);
+
+          if(res.data.error) {
+            this.$notify({
+              title: 'Empty data',
+              message: '连接信息中心服务器错误，按F12查看详情',
+              type: 'warning',
+              duration:'3500',
+            });
+            console.log(res.data.errorMessage);
+            return;
+          }
+
           if(res.data.ROWCOUNT == "0") {
             this.$notify({
               title: 'Empty data',
@@ -262,6 +274,8 @@ export default {
             });
             return;
           }
+
+
           this.remoteList = converData(res.data.DATA);
           //console.log(_this.removeList);
           params = params + '&interface=getInfo';
@@ -270,6 +284,17 @@ export default {
             .then( res => {
               //console.log(res);
               //_this.remoteList = 
+              if(res.data.error) {
+                this.$notify({
+                  title: 'Empty data',
+                  message: '连接信息中心服务器错误，按F12查看详情',
+                  type: 'warning',
+                  duration:'3500',
+                });
+                console.log(res.data.errorMessage);
+                return;
+              }
+
               this.fitTyphoon(res.data.DATA);
               this.$message({
                 message: '查询完成',
@@ -284,7 +309,7 @@ export default {
               this.$message.error('查询出错，F12查看详情');
             });
         })
-         .catch(rror => {
+         .catch(error => {
             console.log(error);
             this.$message.error('查询出错，F12查看详情');
          });
@@ -314,9 +339,10 @@ export default {
     }
     ,corTime:function(){
       let list = this.remoteList;
-      
+      //console.log(this.fitTime);
       list.forEach(item=>{
-        if(item.time == this.time){
+        //console.log(item.time);
+        if(item.time == this.fitTime){
           this.TClist.unshift(item);
         }
       })
@@ -369,9 +395,7 @@ export default {
 
   .el-row {
     margin-bottom: 8px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+    
   }
   .el-col {
     border-radius: 4px;

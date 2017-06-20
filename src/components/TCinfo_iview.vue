@@ -47,7 +47,7 @@
       </el-col>
       <el-col :span="3" class="both_append">
         <span v-on:click="trigerSlider('pressure')">
-          <Slider v-model.number="pressure" :min="870" :max="1020" v-if="showSlider.pressure" :step="1"></Slider> 
+          
           <el-input placeholder="pressure" v-model.number="pressure" size="small">
             <template slot="prepend">
               中心气压
@@ -60,7 +60,7 @@
       </el-col>
     <el-col  :span="3" class="both_append">
       <span v-on:click="trigerSlider('lon')">
-        <Slider v-model.number="lon" :min="80" :max="160" v-if="showSlider.lon" :step="0.1"></Slider>      
+         
         <el-input placeholder="lat" v-model.number="lon" size="small">
           <template slot="prepend">
             经度
@@ -73,7 +73,7 @@
     </el-col>
     <el-col :span="3" class="both_append">
       <span v-on:click="trigerSlider('lat')">
-        <Slider v-model.number="lat" :min="0" :max="60" v-if="showSlider.lat"></Slider>
+        
           <el-input placeholder="lat" v-model="lat" size="small">
             <template slot="prepend">
             纬度
@@ -150,7 +150,7 @@
     <el-col :span="3" class="both_append">
       <Tooltip :content="calKMH+' km/h'">
       <span v-on:click="trigerSlider('speedKTS')">
-        <Slider v-model.number="speedKTS" :min="0" :max="40" v-if="showSlider.speedKTS"></Slider>
+        
         <el-input placeholder="speed" v-model="speedKTS" size="small">
           <template slot="prepend">
             speed
@@ -173,20 +173,25 @@
         </el-input>
       </el-col>
     </el-row>
-    <el-row class="messageBox">
-      <el-input :autosize="{ minRows: 2, maxRows: 4}"
+    <el-row class="messageBox"><!-- 描述框 -->
+      <el-input ref="textEN" :autosize="{ minRows: 2, maxRows: 4}"
       type="textarea" placeholder="请输入内容" name="messageEN"
-      v-model="depictEN">
+      v-model="depictEN" >
       </el-input>
+      <el-button type="primary" size="small" class="text-item" 
+      title="copy"  @click="copyText('textEN')">copy</el-button><!-- 复制按钮 -->
     </el-row>
     <el-row class="messageBox">
-      <el-input type="textarea" autosize placeholder="请输入内容" name="messageCN"
+      <el-input ref="textCN" type="textarea" autosize placeholder="请输入内容" name="messageCN"
       v-model="depictCN">
       </el-input>
+      <el-button type="primary" size="small" class="text-item" 
+      title="copy"  @click="copyText('textCN')">copy</el-button>
     </el-row>
   </div>
 </template>
 <script>
+  import _ from 'lodash';
   import {
     TClist,
     moveDirList,
@@ -238,12 +243,12 @@
           }
         });
       }
-
+      
       return {
         //date: this.tcItem.date ? this.tcItem.date: "",
         //hour: this.tcItem.hour ? this.tcItem.hour: "",
         rankEN: this.tcItem.rankEN ? this.tcItem.rankEN: "",
-        ID: this.tcItem.ID ? this.tcItem.ID: "",
+        ID: this.tcItem.ID ? this.tcItem.ID.replace(/\*+/,''): "",//剔除****的ID号
         pressure: this.tcItem.pressure ? Number(this.tcItem.pressure): "",
         lat: this.tcItem.lat ? this.tcItem.lat: "",
         lon: this.tcItem.lon ? this.tcItem.lon: "",
@@ -300,6 +305,16 @@
           }
         })
         if (rank != 'error') return rank;
+      }
+      ,trendEN: function() {
+        let _trendCN = this.trend;
+        let trendEN = 'error';
+        this.trendList.forEach(function(item) {
+          if (_trendCN == item.cn) {
+            trendEN = item.en;
+          }
+        })
+        if (trendEN != 'error') return trendEN;
       },
       moveDirEN: function() {
         let _dir = this.moveDir;
@@ -313,17 +328,53 @@
       }
       ,
       depictEN: function() {
+        let moveDepict = '';
+        if(this.moveDirEN){
+          if(this.moveDirEN == 'ALMOST STATIONARY'){
+            moveDepict = 'ALMOST STATIONARY.';
+          }
+          else{
+            moveDepict = 'THE MOVEMENT IS TOWARDS ' + this.moveDirEN  + 
+                   (this.speedKTS ? ' ' + this.speedKTS + 'KTS.': '');
+          }
+        }
+        else{
+          moveDepict = '';
+        }
+
         let text = (this.date ? 'AT ' + this.date + '/': '') + (this.hour ? (this.hour + ':00' + ' L.T.') : '') + (this.rankEN ? ' THE ' + this.rankEN: '') + 
                    (this.ID ? ' ' + this.ID + ' ': '') + (this.eName ? '(' + this.ID + ' ' + this.eName.toUpperCase() +')': '') + 
-                   (this.pressure ? ' ' + this.pressure + 'HPA': '') + (this.locationEN ? ' OVER ' + 'THE ' + this.locationEN: '') + (this.lat ? ' WAS LOCATED NEAR ' + this.lat + 'N ': '') + (this.lon ? this.lon + 'E. ': '') + (this.moveDirEN ? 'THE MOVEMENT IS TOWARDS ' + this.moveDirEN: '') + (this.speedKTS ? ' ' + this.speedKTS + 'KTS.': '') + 
-                   (this.detail? ' PLEASE REFER TO TC WARNING FOR DETAIL.' : '');
+                   (this.pressure ? ' ' + this.pressure + 'HPA': '') + 
+                   (this.locationEN ? ' OVER ' + this.locationEN: '') + 
+                   (this.lat ? ' WAS LOCATED NEAR ' + this.lat + 'N ': '') + 
+                   (this.lon ? this.lon + 'E. ': '') + (this.trendEN ? this.trendEN + '. ': '') + moveDepict;
+        //if(text) text += '.';
+        text += (this.detail? ' PLEASE REFER TO TC WARNING FOR DETAIL.' : '');
         return text;
       }
       ,
       depictCN: function() {
+        let moveDepict = '';
+        if(this.moveDir){
+          if(this.moveDir == '原地摆动'){
+            moveDepict = '，原地摆动。';
+          }
+          else{
+            moveDepict = '，向' + this.moveDir + '方向移动，' + (this.speedKMH ? '移速' + this.speedKMH + '公里/小时。': '');
+          }
+        }
+        else{
+          moveDepict = '';
+        }
+
         let text = (this.date ? this.date + '日': '') + (this.hour ? this.hour + '时(北京时)，': '') +  
-        (this.ID ? ' ' + this.ID + '(' + this.ID + ')号': '') + (this.rankCN ? this.rankCN: '') + (this.cName ? this.cName + '，': '') + 
-        (this.lat ? '位于北纬' + this.lat + '度': '') + (this.lon ? '，东经' + this.lon + '度': '') + (this.pressure ? '，中心气压' + this.pressure + '百帕，': '') + (this.locationCN ? '也就是在' + this.locationCN: '') + (this.moveDir ? '，向' + this.moveDir + '方向移动': '') + (this.speedKMH ? '，移速' + this.speedKMH + '公里/小时。': '');
+        (this.ID ? ' ' + this.ID + '(' + this.ID + ')号': '') + (this.rankCN ? this.rankCN: '') + 
+        (this.cName ? this.cName + '，': '') + 
+        (this.lat ? '位于北纬' + this.lat + '度': '') + (this.lon ? '，东经' + this.lon + '度': '') + 
+        (this.pressure ? '，中心气压' + this.pressure + '百帕，': '') + (this.locationCN ? '也就是在' + this.locationCN: '') + 
+        (this.trend ? '，' + this.trend:'') + 
+        moveDepict;
+        //if(text) text += '。';
         return text;
       }
     },
@@ -374,7 +425,7 @@
       //console.log(value);
       this.targetPop.value = value;
       }
-      ,pnpoly: function(point) {
+      ,pnpoly: _.debounce(function(point) {
         let inside = false;
         let location = "";
         var _this = this;
@@ -387,7 +438,7 @@
           }
         }
         if (inside) this.locationCN = location;
-      },
+      },1000),
       changeLocation: function() {
         let loc = null;
         let _CN = this.locationCN;
@@ -397,7 +448,33 @@
           }
         });
         if (loc != null) this.locationEN = loc;
-      }
+      },
+      copyText:function(node){
+        let textElem = this.$refs[node].$el.querySelector('textarea');
+        if(!textElem) return;
+        textElem.focus();
+        textElem.select();
+        try{
+          if(document.execCommand('copy', false, null)){
+            this.$notify({
+              title: '复制成功',
+              message: textElem.value,
+              type: 'success',
+              duration:'2000',
+            });
+            textElem.blur();
+          } else{
+            this.$notify({
+              title: '复制失败',
+              message: '您的浏览器不支持document.execCommand方法',
+              type: 'error',
+              duration:'2000',
+            });
+          }
+        } catch(err){
+            //fail info
+        }
+      },
     }
   }
 </script>
@@ -426,5 +503,12 @@
     bottom: 30px;
     margin-top:10px;
   }
+
+.text-item{
+  padding: 2px 2px 4px 2px;
+  top: 1px;
+  right: 1px;
+  position: absolute;
+}
 
 </style>

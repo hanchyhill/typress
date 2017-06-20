@@ -11,38 +11,46 @@
       ,{"en":"SUPER TY","cn":"超强台风"}
   ],
     "region":[
-      {"en":"NORTHERN SOUTH CHINA SEA","cn":"南海北部海面"}
-      ,{"en":"CENTRAL SOUTH CHINA SEA","cn":"南海中部海面"}
-      ,{"en":"SOUTHERN SOUTH CHINA SEA","cn":"南海南部海面"}
+      {"en":"THE NORTHERN SOUTH CHINA SEA","cn":"南海北部海面"}
+      ,{"en":"THE CENTRAL SOUTH CHINA SEA","cn":"南海中部海面"}
+      ,{"en":"THE SOUTHERN SOUTH CHINA SEA","cn":"南海南部海面"}
       ,{"en":"TAIWAN","cn":"台湾岛","sp":true}
-      ,{"en":"TAIWAN STRAIT","cn":"台湾海峡"}
-      ,{"en":"BASHI CHANNEL","cn":"巴士海峡"}
-      ,{"en":"SEA TO EAST OF TAIWAN","cn":"台湾以东海面"}
-      ,{"en":"SEA TO NORTHEASTERN THE PHILIPPINES","cn":"菲律宾东北部海面"}
-      ,{"en":"SEA TO EAST OF THE PHILIPPINES","cn":"菲律宾以东海面"}
-      ,{"en":"SEA NEARBY THE SOUTHERN PHILIPPINES","cn":"菲律宾南部附近海面"}
-      ,{"en":"OCEAN TO EAST OF THE SOUTHERN PHILIPPINES","cn":"菲律宾南部以东海面"}
-      ,{"en":"PHILIPPINES","cn":"菲律宾群岛"}
-      ,{"en":"SEA TO WEST OF GUAM","cn":"关岛以西海面"}
-      ,{"en":"SEA NEAR GUAM","cn":"关岛附近海面"}
-      ,{"en":"RYUKYU","cn":"琉球群岛海面"}
-      ,{"en":"EAST CHINA SEA","cn":"东海附近海面"}
+      ,{"en":"THE TAIWAN STRAIT","cn":"台湾海峡"}
+      ,{"en":"THE BASHI CHANNEL","cn":"巴士海峡"}
+      ,{"en":"THE SEA TO EAST OF TAIWAN","cn":"台湾以东海面"}
+      ,{"en":"THE SEA TO NORTHEASTERN THE PHILIPPINES","cn":"菲律宾东北部海面"}
+      ,{"en":"THE SEA TO EAST OF THE PHILIPPINES","cn":"菲律宾以东海面"}
+      ,{"en":"THE SEA NEARBY THE SOUTHERN PHILIPPINES","cn":"菲律宾南部附近海面"}
+      ,{"en":"THE OCEAN TO EAST OF THE SOUTHERN PHILIPPINES","cn":"菲律宾南部以东海面"}
+      ,{"en":"THE PHILIPPINES","cn":"菲律宾群岛"}
+      ,{"en":"THE SEA TO WEST OF GUAM","cn":"关岛以西海面"}
+      ,{"en":"THE SEA NEAR GUAM","cn":"关岛附近海面"}
+      ,{"en":"THE RYUKYU ISLANDS","cn":"琉球群岛海面"}
+      ,{"en":"THE SEA TO EAST OF RYUKYU ISLANDS","cn":"琉球群岛以东海面"}
+      ,{"en":"THE EAST CHINA SEA","cn":"东海附近海面"}
       ,{"en":"GUANGDONG","cn":"广东省","sp":true}
       ,{"en":"FUJIAN","cn":"福建省","sp":true}      
-      ,{"en":"BEIBU GULF","cn":"北部湾"}
+      ,{"en":"THE BEIBU GULF","cn":"北部湾"}
       ,{"en":"HAINAN ISLAND","cn":"海南岛","sp":true}
-      ,{"en":"QIONGZHOU STRAIT","cn":"琼州海峡"}
-      ,{"en":"EAST CHINA SEA ","cn":"东海"}
-      ,{"en":"YELLOW SEA","cn":"黄海"}
+      ,{"en":"THE QIONGZHOU STRAIT","cn":"琼州海峡"}
+      ,{"en":"THE GULF OF THAILAND","cn":"泰国湾"}
+      ,{"en":"VIETNAM","cn":"越南"}
+      ,{"en":"GUANGXI","cn":"广西省"}
+      ,{"en":"ZHEJIANG","cn":"浙江省"}
+      ,{"en":"HONGKONG","cn":"香港"}
+      ,{"en":"JAPAN","cn":"日本"}
+      ,{"en":"THE SEA TO EAST OF JAPAN","cn":"日本以东洋面"}
+      ,{"en":"THE EAST CHINA SEA ","cn":"东海"}
+      ,{"en":"THE YELLOW SEA","cn":"黄海"}
     ]
     ,"trendList" : [
-      {"en":"NORTHERN SOUTH CHINA SEA","cn":"强度加强"}
-      ,{"en":"CENTRAL SOUTH CHINA SEA","cn":"强度不加强"}
-      ,{"en":"SOUTHERN SOUTH CHINA SEA","cn":"强度维持"}
-      ,{"en":"SOUTHERN SOUTH CHINA SEA","cn":"趋于减弱"}
+      {"en":"INTENSIFIES GRADUALLY","cn":"强度逐渐加强"}
+      ,{"en":"WEAKEN GRADUALLY","cn":"强度趋于减弱"}
+      ,{"en":"","cn":""}
     ]
     ,"moveDirList":[
-      {"en":"NW","cn":"西北","dir":315}
+      {"en":"ALMOST STATIONARY","cn":"原地摆动","dir":999}
+      ,{"en":"NW","cn":"西北","dir":315}
       ,{"en":"WNW","cn":"西北西","dir":292.5}
       ,{"en":"WLY","cn":"偏西","dir":270}
       ,{"en":"NNW","cn":"北北西","dir":337.5}
@@ -57,8 +65,7 @@
       ,{"en":"SE","cn":"东南","dir":135}
       ,{"en":"ESE","cn":"东南东","dir":112.5}
       ,{"en":"SSW","cn":"南南西","dir":202.5}
-      ,{"en":"SSE","cn":"南南东","dir":157.5}      
-      ,{"en":"ALMOST STATIONARY","cn":"原地摆动","dir":999}     
+      ,{"en":"SSE","cn":"南南东","dir":157.5}   
     ]
       
   }

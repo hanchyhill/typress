@@ -17,8 +17,8 @@ function start(getTyData) {
 
   }
 
-  http.createServer(onRequest).listen(8082);
-  console.log("Server 8082 has started.");
+  http.createServer(onRequest).listen(10082);
+  console.log("Server 10082 has started.");
 }
 
 exports.start = start;

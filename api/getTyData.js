@@ -27,16 +27,18 @@ function getTyData(response,sTime,eTime,interface){
   if(interface == "getInfo"){
     
     dataURL = 'http://172.22.1.175/di/http.action?userId=idc&pwd=idcpwd&interfaceId=getRACTyphoonInfo&dataFormat=json';
-    console.log(dataURL);
+    //dataURL = 'http://172.22.1.175/kk';
+    //console.log(dataURL);
   }
   else if(interface == "getObs"){
     
     dataURL = 'http://172.22.1.175/di/http.action?userId=idc&pwd=idcpwd&interfaceId=getRACTyphoonObsTimeRange&dataFormat=json&s_ymdhms='+
-                sTime + '000000&e_ymdhms=' + eTime + '000000&fcid=BCGZ';
-    console.log(dataURL);
+                sTime + '000000&e_ymdhms=' + eTime + '235900&fcid=BCGZ';
+    //dataURL = 'http://172.22.1.175/kk';
+    //console.log(dataURL);
   }
   else{
-    response.write("");
+    response.write('');
     response.end();
     return;
   }
@@ -46,19 +48,33 @@ function getTyData(response,sTime,eTime,interface){
   return;
   console.log(dataURL);*/
   
-  http.get(dataURL,function(req,res){  
+  http.get(dataURL,(res)=>{
+    if(res.statusCode>400){
+      let text =`{"error":true,
+      "errorMessage":"${res.statusCode}"
+      }`
+      response.write(text);
+      response.end();
+      return;
+    };
     var html='';  
-    req.on('data',function(data){  
+    res.on('data',function(data){  
         html+=data;  
     });
-    req.on('end',function(){  
+    res.on('end',function(){
       //console.info(html);  
       response.write(html);
       response.end();
       //response.end();
     }); 
-  }); 
-  
+  })
+  .on('error', function(error) {
+    let text =`{"error":true,
+    "errorMessage":"${error.message}"
+    }`
+    response.write(text);
+    response.end();
+  });
 }
 
 exports.getTyData = getTyData;
