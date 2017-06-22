@@ -4,92 +4,58 @@
     <el-col :span="1"><div class="grid-content"></div></el-col>
     <el-col :span="23">
   <el-row>
-    <el-col :span="23"><div class="grid-content bg-purple">
-
-      <el-table
-      @row-click = "addNewItem"
-      :data="remoteList"
-      stripe
-      max-height="300"
-      :default-sort = "{prop: 'UTC', order: 'descending'}"
-      style="width: 100%"
-      id = "tc_list_table">
-     <el-table-column
-        prop="UTC"
-        label="UTC"
-        sortable
-        >
-      </el-table-column>
-      <el-table-column
-        prop="UTC8"
-        label="UTC+8"
-        >
-      </el-table-column>
-     <el-table-column
-      prop="lat"
-      label="lat"
-      >
-     </el-table-column>
-     <el-table-column
-        prop="lon"
-        label="lon"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="pressure"
-        label="pressure"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="rankEN"
-        label="scale"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="ID"
-        label="ID"
-        sortable
-        >
-      </el-table-column>
-      <el-table-column
-        prop="moveDir"
-        label="移向"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="direction"
-        label="DIR"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="TSCNAME"
-        label="TSCNAME"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="TSENAME"
-        label="TSENAME"
-        >
-      </el-table-column>
-      <!--<el-table-column
-        prop="time"
-        label="time"
-        >
-      </el-table-column>-->
+    <el-col :span="23">
+      <el-tabs v-model="activeName" type="card" >
+        <el-tab-pane label="广州报文" name="GZ"></el-tab-pane>
+        <el-tab-pane label="低压区" name="LPA" v-if="jpLPA.length!=0"></el-tab-pane>
+      </el-tabs>
+      <div class="grid-content bg-purple">
+    
+      <el-table v-show="activeName=='GZ'"  @row-click = "addNewItem" :data="remoteList"
+      stripe  max-height="300" :default-sort = "{prop: 'UTC', order: 'descending'}"
+      style="width: 100%" class = "tc_list_table">
+      <el-table-column prop="UTC" label="UTC" sortable></el-table-column>
+      <el-table-column prop="UTC8" label="UTC+8"></el-table-column>
+      <el-table-column prop="lat" label="lat"></el-table-column>
+      <el-table-column prop="lon" label="lon"></el-table-column>
+      <el-table-column prop="pressure" label="pressure"></el-table-column>
+      <el-table-column prop="rankEN" label="scale"></el-table-column>
+      <el-table-column prop="ID" label="ID" sortable></el-table-column>
+      <el-table-column prop="moveDir" label="移向"></el-table-column>
+      <el-table-column prop="direction" label="DIR"></el-table-column>
+      <el-table-column prop="TSCNAME" label="TSCNAME"></el-table-column>
+      <el-table-column prop="TSENAME" label="TSENAME"></el-table-column>
+      <!--<el-table-column prop="time" label="time"></el-table-column>-->
     </el-table>
-
+    <!--结束广州报文-->
+    <el-table v-show="activeName=='LPA'" @row-click = "addNewItem" :data="jpLPA"
+      stripe max-height="300" style="width: 100%" class = "tc_list_table">
+      <el-table-column prop="timeText" label="世界时"></el-table-column>
+      <el-table-column prop="hour" label="小时"></el-table-column>
+      <el-table-column prop="lat" label="lat"></el-table-column>
+      <el-table-column prop="lon" label="lon"></el-table-column>
+      <el-table-column prop="pressure" label="pressure"></el-table-column>
+      <el-table-column prop="rankEN" label="scale"></el-table-column>      
+      <el-table-column prop="moveDir" label="移向"></el-table-column>
+      <el-table-column prop="speedKTS" label="节"></el-table-column>
+    </el-table>
+    <!--结束日本低压区-->
     </div></el-col>
   </el-row>
 
 <el-row>
   <el-col :span="23">
     <div class="tool_bar grid-content">
-    <el-button type="primary" title="新建描述" icon="plus" v-on:click="addNewItem('')" size="small">添加词条</el-button>
-      选择查询日期范围<span class = "time_input">
-      <Date-picker @on-change="changeSearchTime" type="daterange" :options="searchTime" :value="searchRange"
-      placement="bottom-end" placeholder="选择日期" style="width: 400px"></Date-picker>
-      </span>
-    <el-button type="primary" title="search" icon="search" v-on:click="getData" size="small">查询</el-button>
+      <el-button type="primary" title="新建描述" icon="plus" v-on:click="addNewItem('')" size="small">添加词条</el-button>
+        选择查询日期范围<span class = "time_input">
+      
+        <Date-picker @on-change="changeSearchTime" type="daterange" :options="searchTime" :value="searchRange"
+        placement="bottom-end" placeholder="选择日期" style="width: 400px"></Date-picker>
+        </span>
+        <el-button type="primary" title="search" icon="search" v-on:click="getData" size="small">查询</el-button>
+      
+    <el-button type="success" title="search" icon="search" v-on:click="getBulletin" size="small">低压区</el-button>
+    
     </div>
   </el-col>
 </el-row>
@@ -129,18 +95,20 @@ export default {
                 (Array(2).join('0') + iniTime2.getDate()).slice(-2);
     return {
     //TClist : TClist
-    TClist : []
-    ,TCRankList:TCRankList
-    ,region:regionList
-    ,trendList : trendList
-    ,moveDirList:moveDirList
-    ,remoteList:[]
-    ,TCinfo : []
-    ,searchRange:[iniTime2, iniTime]
-    ,startTime:sTime
-    ,endTime:eTime
-    ,fitTime:this.fitDate()
-    ,searchTime: {
+    TClist : [],
+    TCRankList:TCRankList,
+    region:regionList,
+    trendList : trendList,
+    moveDirList:moveDirList,
+    remoteList:[], //数据库返回数据
+    jpLPA:[], //日本低压区数据
+    TCinfo : [],
+    searchRange:[iniTime2, iniTime],
+    startTime:sTime,
+    endTime:eTime,
+    fitTime:this.fitDate(),
+    activeName:'GZ',
+    searchTime: {
        shortcuts: [
          {
            text: '最近1周',
@@ -170,10 +138,11 @@ export default {
             } 
           }
         ]
-      }
+      },
 	  }
   }
   ,created:function(){
+      this.getBulletin();
       this.getBasicInfo();
   }
   ,computed:{
@@ -302,6 +271,7 @@ export default {
                 duration: 1000
               });
               this.corTime();
+              setTimeout(()=>this.activeName = 'GZ',500);
             })
 
             .catch(error => {
@@ -323,9 +293,40 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
-
-    ,fitTyphoon:function(tyInfo){
+    },
+    getBulletin:function(){
+      let fullURL = '/fetch/getData?' +  '&interface=bulletin';
+      this.$message({message: '正在查询最新日本报文',type: 'info',duration: 1000});
+      axios.get(fullURL)
+      .then(res=>{
+        if(res.data.error) {
+          this.$notify({
+            title: 'Empty data',
+            message: '连接NOAA服务器错误，按F12查看详情',
+            type: 'warning',
+            duration:'3500',
+          });
+          console.log(res.data.errorMessage);
+          return;
+        }
+        if(res.data.status){
+          console.log(res.data);
+          this.jpLPA = res.data.data;
+          this.$message({message: '发现低压区信息',type: 'info',duration: 1000});
+          setTimeout(()=>this.activeName = 'LPA',500)
+          //this.activeName = 'LPA';
+        }
+        else{
+          this.$notify({title: 'Empty data', message: '无低压区信息', type: 'warning', duration:'2000',});
+        }
+        //console.log(res.data);
+      })
+      .catch(error => {
+            console.log(error);
+            this.$message.error('查询日本报文出错，F12查看详情');
+      });
+    },
+    fitTyphoon:function(tyInfo){
       var tyList = this.remoteList;
       tyList.forEach(function(itemL){
         tyInfo.forEach(function(itemI){
@@ -380,7 +381,7 @@ export default {
   cursor:pointer;
 }
 
-#tc_list_table .el-table__body-wrapper tr:hover{
+.tc_list_table .el-table__body-wrapper tr:hover{
   cursor:pointer;
   color:red;
 }
