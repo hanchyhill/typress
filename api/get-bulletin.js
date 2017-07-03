@@ -88,7 +88,7 @@ function convertBulletin(text){//筛选出低压区信息
           meta.speedKMH = 4;
         }
         else{
-          let knots = item.match(/(d+)\s*?(KNOTS|KT)/)[1];
+          let knots = item.match(/(\d+)\s*?(KNOTS|KT)/)[1];
           if(knots){
             meta.speedKTS = Number(knots);
             meta.speedKMH = Math.round(meta.speedKTS*1.852);
