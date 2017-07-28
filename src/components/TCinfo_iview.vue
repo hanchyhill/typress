@@ -4,7 +4,7 @@
     </el-button>
 
     <el-row class="list01">
-      <el-col :span="6" class="time">
+      <el-col :span="5" class="time">
         当地时间
         <el-date-picker
          :style="{width:'120px'}"       
@@ -27,7 +27,7 @@
          placeholder="选择时间">
          </el-time-select>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="4">
         <span>
           TC级别
         </span>
@@ -58,7 +58,19 @@
           </el-input>
         </span>
       </el-col>
-    <el-col  :span="3" class="both_append">
+    
+    </el-row>
+    <el-row class="list02">
+      <el-col :span="6">
+        位置
+        <el-select v-bind:title="rankEN" v-model="locationCN" placeholder="请选择"
+        size="small" allow-create filterable>
+          <el-option v-for="(loc,index) in region" :label="loc.cn" :value="loc.cn"
+          :key="index">
+          </el-option>
+        </el-select>
+      </el-col>
+      <el-col  :span="3" class="both_append">
       <span v-on:click="trigerSlider('lon')">
          
         <el-input placeholder="lat" v-model.number="lon" size="small">
@@ -84,18 +96,7 @@
           </el-input>
         </span>
       </el-col>
-    </el-row>
-    <el-row class="list02">
-      <el-col :span="6">
-        位置
-        <el-select v-bind:title="rankEN" v-model="locationCN" placeholder="请选择"
-        size="small" allow-create filterable>
-          <el-option v-for="(loc,index) in region" :label="loc.cn" :value="loc.cn"
-          :key="index">
-          </el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="9">
+      <!--<el-col :span="9">
         location
         <el-select v-bind:title="rankEN" v-model="locationEN" placeholder="请选择"
         size="small" allow-create filterable>
@@ -104,17 +105,20 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span="9">
-       Refer detail  
+      <el-col :span="9">-->
+      <el-col :span="3" style="margin-left:15px;">
+        查看警报  
         <el-switch
         v-model="detail"
         on-color="#13ce66"
         size="small">
         </el-switch>
       </el-col>
+       
+      
     </el-row>
     <el-row class="list03">
-      <el-col :span="5">
+      <el-col :span="4">
         强度趋势
         <el-select v-bind:title="rankEN" v-model="trend" placeholder="请选择" size="small"
         allow-create filterable>
@@ -123,7 +127,7 @@
           </el-option>
         </el-select>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="4">
         移向
         <el-select v-bind:title="rankEN" v-model="moveDir" placeholder="请选择" size="small"
         allow-create filterable>
@@ -243,7 +247,7 @@
           }
         });
       }
-      
+      let nowTime = new Date();
       return {
         //date: this.tcItem.date ? this.tcItem.date: "",
         //hour: this.tcItem.hour ? this.tcItem.hour: "",
@@ -258,7 +262,7 @@
         moveDir: this.tcItem.moveDir ? this.tcItem.moveDir: "",
         speedKMH: this.tcItem.speedKMH ? this.tcItem.speedKMH: "",
         speedKTS: this.tcItem.speedKTS ? this.tcItem.speedKTS: "",
-        rid: this.tcItem.rid ? this.tcItem.rid: 0.1,
+        rid: this.tcItem.rid ? this.tcItem.rid: Math.random()*10,
         cName: this.tcItem.TSCNAME ? this.tcItem.TSCNAME: "",
         eName: this.tcItem.TSENAME ? this.tcItem.TSENAME: "",
         showSlider:{
@@ -270,8 +274,8 @@
         }
         ,selectHour:this.tcItem.hour ? this.tcItem.hour +':00': ""
         ,test:new Date(2016, 9, 10, 18, 40)
-        ,selectDate:this.tcItem.timeUTC ? this.tcItem.timeUTC: ""
-        ,detail:false
+        ,selectDate:this.tcItem.timeUTC ? this.tcItem.timeUTC: nowTime.toISOString(),
+        detail:false,
         //,stylePop:{left: '0px',              right: '0px'}
         //,oldCN:""
       }
@@ -375,6 +379,7 @@
         (this.trend ? '，' + this.trend:'') + 
         moveDepict;
         //if(text) text += '。';
+        text += (this.detail? '请查看热带气旋警报。' : '');
         return text;
       }
     },

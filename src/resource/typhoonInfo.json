@@ -22,12 +22,11 @@
       ,{"en":"THE SEA TO EAST OF THE PHILIPPINES","cn":"菲律宾以东海面"}
       ,{"en":"THE SEA NEARBY THE SOUTHERN PHILIPPINES","cn":"菲律宾南部附近海面"}
       ,{"en":"THE OCEAN TO EAST OF THE SOUTHERN PHILIPPINES","cn":"菲律宾南部以东海面"}
-      ,{"en":"THE PHILIPPINES","cn":"菲律宾群岛"}
+      ,{"en":"THE PHILIPPINES","cn":"菲律宾群岛附近"}
       ,{"en":"THE SEA TO WEST OF GUAM","cn":"关岛以西海面"}
       ,{"en":"THE SEA NEAR GUAM","cn":"关岛附近海面"}
-      ,{"en":"THE RYUKYU ISLANDS","cn":"琉球群岛海面"}
+      ,{"en":"THE RYUKYU ISLANDS","cn":"琉球群岛附近海面"}
       ,{"en":"THE SEA TO EAST OF RYUKYU ISLANDS","cn":"琉球群岛以东海面"}
-      ,{"en":"THE EAST CHINA SEA","cn":"东海附近海面"}
       ,{"en":"GUANGDONG","cn":"广东省","sp":true}
       ,{"en":"FUJIAN","cn":"福建省","sp":true}      
       ,{"en":"THE BEIBU GULF","cn":"北部湾"}
@@ -40,7 +39,7 @@
       ,{"en":"HONGKONG","cn":"香港"}
       ,{"en":"JAPAN","cn":"日本"}
       ,{"en":"THE SEA TO EAST OF JAPAN","cn":"日本以东洋面"}
-      ,{"en":"THE EAST CHINA SEA ","cn":"东海"}
+      ,{"en":"THE EAST CHINA SEA","cn":"东海附近海面"}
       ,{"en":"THE YELLOW SEA","cn":"黄海"}
     ]
     ,"trendList" : [

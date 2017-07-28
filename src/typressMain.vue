@@ -7,7 +7,7 @@
     <el-col :span="23">
       <el-tabs v-model="activeName" type="card" >
         <el-tab-pane label="广州报文" name="GZ"></el-tab-pane>
-        <el-tab-pane label="低压区" name="LPA" v-if="jpLPA.length!=0"></el-tab-pane>
+        <el-tab-pane label="低压区/TD" name="LPA" v-if="jpLPA.length!=0"></el-tab-pane>
       </el-tabs>
       <div class="grid-content bg-purple">
     
@@ -22,7 +22,8 @@
       <el-table-column prop="rankEN" label="scale"></el-table-column>
       <el-table-column prop="ID" label="ID" sortable></el-table-column>
       <el-table-column prop="moveDir" label="移向"></el-table-column>
-      <el-table-column prop="direction" label="DIR"></el-table-column>
+      <!--<el-table-column prop="direction" label="DIR"></el-table-column>-->
+      <el-table-column prop="speedKMH" label="移速km/h"></el-table-column>
       <el-table-column prop="TSCNAME" label="TSCNAME"></el-table-column>
       <el-table-column prop="TSENAME" label="TSENAME"></el-table-column>
       <!--<el-table-column prop="time" label="time"></el-table-column>-->
@@ -54,7 +55,7 @@
         </span>
         <el-button type="primary" title="search" icon="search" v-on:click="getData" size="small">查询</el-button>
       
-    <el-button type="success" title="search" icon="search" v-on:click="getBulletin" size="small">低压区</el-button>
+    <el-button type="success" title="search" icon="search" v-on:click="getBulletin" size="small">低压区/TD (WWJP25)</el-button>
     
     </div>
   </el-col>
@@ -312,12 +313,12 @@ export default {
         if(res.data.status){
           console.log(res.data);
           this.jpLPA = res.data.data;
-          this.$message({message: '发现低压区信息',type: 'info',duration: 1000});
+          this.$message({message: '发现低压区/TD信息',type: 'info',duration: 1000});
           setTimeout(()=>this.activeName = 'LPA',500)
           //this.activeName = 'LPA';
         }
         else{
-          this.$notify({title: 'Empty data', message: '无低压区信息', type: 'warning', duration:'2000',});
+          this.$notify({title: 'Empty data', message: '无低压区、TD信息', type: 'warning', duration:'2000',});
         }
         //console.log(res.data);
       })

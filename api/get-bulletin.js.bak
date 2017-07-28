@@ -94,7 +94,7 @@ function convertBulletin(text){//筛选出低压区信息
     if(dirIndex!==-1){
       meta.dir = dirList[dirIndex].dir;
       meta.moveDir = dirList[dirIndex].cn;
-      if(meta.dir!==999){//原地摆动
+      if(dirIndex!==0){//原地摆动
         if(item.indexOf('SLOWLY')!==-1){
 
           meta.speedKTS = 2;

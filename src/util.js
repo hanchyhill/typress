@@ -61,21 +61,21 @@ function converData(list){
   list.forEach(function(item,index){
     let UTCtime = item.DDATETIME.replace(' ','T')+"00Z";
     finalList[index] = {
-      "ID":item.TCID
-      ,"rankEN":item.TCRANK
-      ,"lat":Number(item.LATITUDE)
-      ,"lon":Number(item.LONGITUDE)
-      ,"pressure":item.PRESSURE
-      ,"rankEN":item.TCRANK
-      ,"uyear":item.DDATETIME.slice(0,4)
-      ,"umonth":item.DDATETIME.slice(5,7)
-      ,"uday":item.DDATETIME.slice(8,10)
-      ,"uhour":item.DDATETIME.slice(11,13)
-      ,"speedKMH":Number(item.SPEED)
-      ,"moveDir":item.DIRECTION.length?converDir(Number(item.DIRECTION)):""
-      ,"direction":item.DIRECTION
-      ,"TSID":item.TSID
-      ,timeUTC:UTCtime
+      "ID":item.TCID,
+      "rankEN":item.TCRANK,
+      "lat":Number(item.LATITUDE),
+      "lon":Number(item.LONGITUDE),
+      "pressure":item.PRESSURE,
+      "rankEN":item.TCRANK,
+      "uyear":item.DDATETIME.slice(0,4),
+      "umonth":item.DDATETIME.slice(5,7),
+      "uday":item.DDATETIME.slice(8,10),
+      "uhour":item.DDATETIME.slice(11,13),
+      "speedKMH":item.SPEED?Number(item.SPEED):null,
+      "moveDir":item.DIRECTION.length?converDir(Number(item.DIRECTION)):"",
+      "direction":item.DIRECTION,
+      "TSID":item.TSID,
+      "timeUTC":UTCtime,
     };
     let localTime = new Date(Number(finalList[index].uyear), Number(finalList[index].umonth) - 1,
      Number(finalList[index].uday), Number(finalList[index].uhour) + 8);
@@ -83,7 +83,7 @@ function converData(list){
     finalList[index].month = localTime.getMonth()+1;
     finalList[index].date = (Array(2).join('0') + localTime.getDate()).slice(-2);
     finalList[index].hour = (Array(2).join('0') + localTime.getHours()).slice(-2);
-    finalList[index].speedKTS = Math.round(finalList[index].speedKMH/1.852);
+    finalList[index].speedKTS = finalList[index].speedKMH?Math.round(finalList[index].speedKMH/1.852):null;
     finalList[index].UTC = item.DDATETIME.slice(2,13);
     finalList[index].UTC8 = finalList[index].month +
                              '-' + finalList[index].date + ' ' + finalList[index].hour+'时';

@@ -26,13 +26,13 @@ function getTyData(response,sTime,eTime,interface){
   var dataURL = ""
   if(interface == "getInfo"){
     
-    dataURL = 'http://172.22.1.175/di/http.action?userId=idc&pwd=idcpwd&interfaceId=getRACTyphoonInfo&dataFormat=json';
+    dataURL = 'http://172.22.1.175/di/http.action?userId=idc&pwd=sW4EH7&interfaceId=getRACTyphoonInfo&dataFormat=json';
     //dataURL = 'http://172.22.1.175/kk';
     //console.log(dataURL);
   }
   else if(interface == "getObs"){
     
-    dataURL = 'http://172.22.1.175/di/http.action?userId=idc&pwd=idcpwd&interfaceId=getRACTyphoonObsTimeRange&dataFormat=json&s_ymdhms='+
+    dataURL = 'http://172.22.1.175/di/http.action?userId=idc&pwd=sW4EH7&interfaceId=getRACTyphoonObsTimeRange&dataFormat=json&s_ymdhms='+
                 sTime + '000000&e_ymdhms=' + eTime + '235900&fcid=BCGZ';
     //dataURL = 'http://172.22.1.175/kk';
     //console.log(dataURL);
