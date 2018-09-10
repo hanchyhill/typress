@@ -1871,6 +1871,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "关岛以西海面"
       },
       "geometry": {
@@ -2537,6 +2542,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "琉球群岛以东海面"
       },
       "geometry": {
@@ -3833,6 +3843,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "台湾海峡"
       },
       "geometry": {
@@ -3946,6 +3961,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "小笠原群岛附近海面"
       },
       "geometry": {
@@ -3979,6 +3999,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "渤海"
       },
       "geometry": {
@@ -4120,6 +4145,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "朝鲜海峡"
       },
       "geometry": {
@@ -4181,6 +4211,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "日本海"
       },
       "geometry": {
@@ -4282,6 +4317,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "上海"
       },
       "geometry": {
@@ -4367,6 +4407,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "江苏省"
       },
       "geometry": {
@@ -4528,6 +4573,11 @@
     {
       "type": "Feature",
       "properties": {
+        "stroke": "#555555",
+        "stroke-width": 2,
+        "stroke-opacity": 1,
+        "fill": "#555555",
+        "fill-opacity": 0.5,
         "region": "朝鲜半岛"
       },
       "geometry": {
@@ -4645,158 +4695,6 @@
             [
               130.53955078125,
               42.35854391749705
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "region": "关岛以南附近海面"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              139.81201171874997,
-              10.271681232946728
-            ],
-            [
-              139.89990234375,
-              1.0546279422758869
-            ],
-            [
-              149.96337890625,
-              0.8129610018708315
-            ],
-            [
-              150.13916015625,
-              10.35815140094367
-            ],
-            [
-              139.81201171874997,
-              10.271681232946728
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "region": "关岛以东附近海面"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              150.2490234375,
-              24.327076540018634
-            ],
-            [
-              149.9853515625,
-              0.7470491450051796
-            ],
-            [
-              163.2568359375,
-              0.7690198781221326
-            ],
-            [
-              163.3447265625,
-              24.246964554300924
-            ],
-            [
-              150.2490234375,
-              24.327076540018634
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "region":"马绍尔群岛附近海面"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              163.388671875,
-              24.246964554300924
-            ],
-            [
-              163.30078125,
-              0.7470491450051796
-            ],
-            [
-              175.078125,
-              0.7909904981540058
-            ],
-            [
-              175.1220703125,
-              24.16680208530324
-            ],
-            [
-              163.388671875,
-              24.246964554300924
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "region": "太平洋中部偏西附近海面"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              175.078125,
-              24.046463999666567
-            ],
-            [
-              174.990234375,
-              0.6591651462894632
-            ],
-            [
-              189.84375,
-              0.615222552406841
-            ],
-            [
-              189.84375,
-              24.367113562651262
-            ],
-            [
-              175.078125,
-              24.046463999666567
             ]
           ]
         ]

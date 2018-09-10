@@ -7,7 +7,7 @@
       <el-col :span="5" class="time">
         当地时间
         <el-date-picker
-         :style="{width:'120px'}"       
+         :style="{width:'120px'}"
          size="small"
          v-model="selectDate"
          align="right"
@@ -22,7 +22,7 @@
          :picker-options="{
           start: '02:00',
           step: '03:00',
-          end: '23:00' 
+          end: '23:00'
          }"
          placeholder="选择时间">
          </el-time-select>
@@ -47,7 +47,7 @@
       </el-col>
       <el-col :span="3" class="both_append">
         <span v-on:click="trigerSlider('pressure')">
-          
+
           <el-input placeholder="pressure" v-model.number="pressure" size="small">
             <template slot="prepend">
               中心气压
@@ -58,7 +58,7 @@
           </el-input>
         </span>
       </el-col>
-    
+
     </el-row>
     <el-row class="list02">
       <el-col :span="6">
@@ -72,7 +72,7 @@
       </el-col>
       <el-col  :span="3" class="both_append">
       <span v-on:click="trigerSlider('lon')">
-         
+
         <el-input placeholder="lat" v-model.number="lon" size="small">
           <template slot="prepend">
             经度
@@ -85,7 +85,7 @@
     </el-col>
     <el-col :span="3" class="both_append">
       <span v-on:click="trigerSlider('lat')">
-        
+
           <el-input placeholder="lat" v-model="lat" size="small">
             <template slot="prepend">
             纬度
@@ -107,15 +107,15 @@
       </el-col>
       <el-col :span="9">-->
       <el-col :span="3" style="margin-left:15px;">
-        查看警报  
+        查看警报
         <el-switch
         v-model="detail"
         on-color="#13ce66"
         size="small">
         </el-switch>
       </el-col>
-       
-      
+
+
     </el-row>
     <el-row class="list03">
       <el-col :span="4">
@@ -154,7 +154,7 @@
     <el-col :span="3" class="both_append">
       <Tooltip :content="calKMH+' km/h'">
       <span v-on:click="trigerSlider('speedKTS')">
-        
+
         <el-input placeholder="speed" v-model="speedKTS" size="small">
           <template slot="prepend">
             speed
@@ -182,14 +182,14 @@
       type="textarea" placeholder="请输入内容" name="messageEN"
       v-model="depictEN" >
       </el-input>
-      <el-button type="primary" size="small" class="text-item" 
+      <el-button type="primary" size="small" class="text-item"
       title="copy"  @click="copyText('textEN')">copy</el-button><!-- 复制按钮 -->
     </el-row>
     <el-row class="messageBox">
       <el-input ref="textCN" type="textarea" autosize placeholder="请输入内容" name="messageCN"
       v-model="depictCN">
       </el-input>
-      <el-button type="primary" size="small" class="text-item" 
+      <el-button type="primary" size="small" class="text-item"
       title="copy"  @click="copyText('textCN')">copy</el-button>
     </el-row>
   </div>
@@ -275,7 +275,7 @@
         ,selectHour:this.tcItem.hour ? this.tcItem.hour +':00': ""
         ,test:new Date(2016, 9, 10, 18, 40)
         ,selectDate:this.tcItem.timeUTC ? this.tcItem.timeUTC: nowTime.toISOString(),
-        detail:false,
+        detail:this.tcItem.TCwarning,
         //,stylePop:{left: '0px',              right: '0px'}
         //,oldCN:""
       }
@@ -286,13 +286,13 @@
           let time = new Date(this.selectDate)
           return (Array(2).join('0') + time.getDate()).slice(-2);
         }
-        
+
       }
       ,hour:function(){
         if(this.selectHour){
           return this.selectHour.slice(0,2);
         }
-        
+
       }
       ,calKTS:function(){
         return (this.speedKMH/1.852).toFixed(2);
@@ -338,7 +338,7 @@
             moveDepict = 'ALMOST STATIONARY.';
           }
           else{
-            moveDepict = 'THE MOVEMENT IS TOWARDS ' + this.moveDirEN  + 
+            moveDepict = 'THE MOVEMENT IS TOWARDS ' + this.moveDirEN  +
                    (this.speedKTS ? ' ' + this.speedKTS + 'KTS.': '');
           }
         }
@@ -346,11 +346,11 @@
           moveDepict = '';
         }
 
-        let text = (this.date ? 'AT ' + this.date + '/': '') + (this.hour ? (this.hour + ':00' + ' L.T.') : '') + (this.rankEN ? ' THE ' + this.rankEN: '') + 
-                   (this.ID ? ' ' + this.ID + ' ': '') + (this.eName ? '(' + this.ID + ' ' + this.eName.toUpperCase() +')': '') + 
-                   (this.pressure ? ' ' + this.pressure + 'HPA': '') + 
-                   (this.locationEN ? ' OVER ' + this.locationEN: '') + 
-                   (this.lat ? ' WAS LOCATED NEAR ' + this.lat + 'N ': '') + 
+        let text = (this.date ? 'AT ' + this.date + '/': '') + (this.hour ? (this.hour + ':00' + ' L.T.') : '') + (this.rankEN ? ' THE ' + this.rankEN: '') +
+                   (this.ID ? ' ' + this.ID + ' ': '') + (this.eName ? '(' + this.ID + ' ' + this.eName.toUpperCase() +')': '') +
+                   (this.pressure ? ' ' + this.pressure + 'HPA': '') +
+                   (this.locationEN ? ' OVER ' + this.locationEN: '') +
+                   (this.lat ? ' WAS LOCATED NEAR ' + this.lat + 'N ': '') +
                    (this.lon ? this.lon + 'E. ': '') + (this.trendEN ? this.trendEN + '. ': '') + moveDepict;
         //if(text) text += '.';
         text += (this.detail? ' PLEASE REFER TO TC WARNING FOR DETAIL.' : '');
@@ -371,12 +371,12 @@
           moveDepict = '';
         }
 
-        let text = (this.date ? this.date + '日': '') + (this.hour ? this.hour + '时(北京时)，': '') +  
-        (this.ID ? ' ' + this.ID + '(' + this.ID + ')号': '') + (this.rankCN ? this.rankCN: '') + 
-        (this.cName ? this.cName + '，': '') + 
-        (this.lat ? '位于北纬' + this.lat + '度': '') + (this.lon ? '，东经' + this.lon + '度': '') + 
-        (this.pressure ? '，中心气压' + this.pressure + '百帕，': '') + (this.locationCN ? '也就是在' + this.locationCN: '') + 
-        (this.trend ? '，' + this.trend:'') + 
+        let text = (this.date ? this.date + '日': '') + (this.hour ? this.hour + '时(北京时)，': '') +
+        (this.ID ? ' ' + this.ID + '(' + this.ID + ')号': '') + (this.rankCN ? this.rankCN: '') +
+        (this.cName ? this.cName + '，': '') +
+        (this.lat ? '位于北纬' + this.lat + '度': '') + (this.lon ? '，东经' + this.lon + '度': '') +
+        (this.pressure ? '，中心气压' + this.pressure + '百帕，': '') + (this.locationCN ? '也就是在' + this.locationCN: '') +
+        (this.trend ? '，' + this.trend:'') +
         moveDepict;
         //if(text) text += '。';
         text += (this.detail? '请查看热带气旋警报。' : '');
@@ -424,7 +424,7 @@
         //this.stylePop.top = (event.pageY-20).toString()+'px';
         this.targetPop = event.target;
       }
-      
+
       }
       ,changeInput:function(value){
       //console.log(value);

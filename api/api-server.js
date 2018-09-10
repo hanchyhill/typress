@@ -8,12 +8,14 @@ function start(getTyData) {
     var pathname = url.parse(request.url).pathname;
     console.log("Request for " + pathname + " received.");
     var queryUrl = url.parse(request.url).query ;
-    
+
 
     var interface =  qs.parse(queryUrl)["interface"];
     if(interface=='bulletin'){
       //console.log('getBulletin');
-      getJpBulletin('http://tgftp.nws.noaa.gov/data/raw/ww/wwjp25.rjtd..txt')
+      // http://www.jma.go.jp/en/g3/
+      //getJpBulletin('http://tgftp.nws.noaa.gov/data/raw/ww/wwjp25.rjtd..txt')
+      getJpBulletin('http://www.jma.go.jp/en/g3/')
       //getJpBulletin('http://localhost:10080/static/JP/WWJP25 RJTD 250000.txt')
       .then(data=>{
         //console.log(data);
@@ -34,8 +36,9 @@ function start(getTyData) {
     else{
       let sTime =  qs.parse(queryUrl)["startTime"];
       let eTime =  qs.parse(queryUrl)["endTime"];
+      let ins = qs.parse(queryUrl)["ins"];
       response.writeHead(200, {"Content-Type": "text/json","Access-Control-Allow-Origin":"*"});
-      getTyData(response,sTime,eTime,interface);
+      getTyData(response,sTime,eTime,interface,ins);
     }
   }
 

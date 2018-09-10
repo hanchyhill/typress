@@ -1,9 +1,9 @@
 var http=require('http');
 
 
-function getTyData(response,sTime,eTime,interface){
+function getTyData(response,sTime,eTime,interface,ins='BCGZ'){
 
-//get 请求外网  
+//get 请求外网
 //
   //console.log(sTime);
   //console.log(eTime);
@@ -11,7 +11,7 @@ function getTyData(response,sTime,eTime,interface){
   if(!sTime || Number(sTime) == NaN || sTime.length !=8){
       sTime = "20160828";
     }
- 
+
   if(!eTime || Number(eTime) == NaN || sTime.length !=8){
     eTime = "20160830";
   }
@@ -25,15 +25,15 @@ function getTyData(response,sTime,eTime,interface){
 
   var dataURL = ""
   if(interface == "getInfo"){
-    
+
     dataURL = 'http://172.22.1.175/di/http.action?userId=sqxt&pwd=shengqxt123&interfaceId=getRACTyphoonInfo&dataFormat=json';
     //dataURL = 'http://172.22.1.175/kk';
     //console.log(dataURL);
   }
   else if(interface == "getObs"){
-    
+
     dataURL = 'http://172.22.1.175/di/http.action?userId=sqxt&pwd=shengqxt123&interfaceId=getRACTyphoonObsTimeRange&dataFormat=json&s_ymdhms='+
-                sTime + '000000&e_ymdhms=' + eTime + '235900&fcid=BCGZ';
+                sTime + '000000&e_ymdhms=' + eTime + '235900&fcid='+ins;
     //dataURL = 'http://172.22.1.175/kk';
     //console.log(dataURL);
   }
@@ -42,12 +42,12 @@ function getTyData(response,sTime,eTime,interface){
     response.end();
     return;
   }
-  
+
 /*  response.write("test");
   response.end();
   return;
   console.log(dataURL);*/
-  
+
   http.get(dataURL,(res)=>{
     if(res.statusCode>400){
       let text =`{"error":true,
@@ -57,16 +57,16 @@ function getTyData(response,sTime,eTime,interface){
       response.end();
       return;
     };
-    var html='';  
-    res.on('data',function(data){  
-        html+=data;  
+    var html='';
+    res.on('data',function(data){
+        html+=data;
     });
     res.on('end',function(){
-      //console.info(html);  
+      //console.info(html);
       response.write(html);
       response.end();
       //response.end();
-    }); 
+    });
   })
   .on('error', function(error) {
     let text =`{"error":true,
