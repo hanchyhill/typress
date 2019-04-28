@@ -85,8 +85,8 @@
       placeholder="选择日期" style="width: 150px"></Date-picker>
     </span>
     <el-select v-model="ftpHour" placeholder="请选择" size="small" style="width: 100px">
-      <el-option label="08时" value="08"></el-option>
-      <el-option label="20时" value="20"></el-option>
+      <el-option label="08时" value="0800"></el-option>
+      <el-option label="20时" value="2000"></el-option>
     </el-select>
     </div>
   </el-col>
@@ -144,7 +144,7 @@ export default {
     activeName:'GZ',
     insSelected:'BCGZ',
     ftpDate:new Date(),
-    ftpHour:(new Date()).getHours>14? '20':'08',
+    ftpHour:(new Date()).getHours>14? '2000':'0800',
     insList:[
       {value:'BCGZ',cn:'广州',},
       {value:'BABJ',cn:'北京',}
@@ -287,7 +287,7 @@ export default {
           if(ins=='BCGZ'){
             this.remoteList = converData(res.data.DATA);
             this.remoteList.forEach(item=>{
-              if(item.lon<130&&item.lon>105&&item.lat<25&&item.lat>0){
+              if(item.lon<140&&item.lon>105&&item.lat<25&&item.lat>0){
                 Vue.set(item,'TCwarning',true);
               }
             })
