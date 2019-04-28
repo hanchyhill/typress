@@ -5,11 +5,16 @@ var getJpBulletin = require("./get-bulletin.js").getJpBulletin;
 
 function start(getTyData) {
   function onRequest(request, response) {
+    response.writeHead(200, {"Content-Type": "text/json",
+      "Access-Control-Allow-Origin":"*",
+      "Access-Control-Allow-Headers": "Content-Type,Content-Length, Authorization, Accept,X-Requested-With",
+      "Access-Control-Allow-Methods":"PUT,POST,GET,DELETE,OPTIONS"
+    });
+    if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
+
     var pathname = url.parse(request.url).pathname;
     console.log("Request for " + pathname + " received.");
     var queryUrl = url.parse(request.url).query ;
-
-
     var interface =  qs.parse(queryUrl)["interface"];
     if(interface=='bulletin'){
       //console.log('getBulletin');

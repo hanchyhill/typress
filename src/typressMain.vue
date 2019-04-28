@@ -75,10 +75,19 @@
       <Date-picker @on-change="changeSearchTime" type="daterange" :options="searchTime" :value="searchRange"
       placement="bottom-end" placeholder="选择日期" style="width: 200px"></Date-picker>
       </span>
-      <el-button type="primary" title="search" icon="search" v-on:click="getData(insSelected)" size="small">查询</el-button>
+      <el-button type="success" title="search" icon="search" v-on:click="getData(insSelected)" size="small">查询</el-button>
 
     <el-button type="success" title="search" icon="search" v-on:click="getBulletin" size="small">低压区/TD (WWJP25)</el-button>
-
+    <el-button type="primary" title="search" v-on:click="ftpUpload" size="small">上传FTP<i class="el-icon-upload el-icon--right"></i></el-button>
+    <span class = "time_input">
+      <Date-picker v-model="ftpDate"
+      type="date"
+      placeholder="选择日期" style="width: 150px"></Date-picker>
+    </span>
+    <el-select v-model="ftpHour" placeholder="请选择" size="small" style="width: 100px">
+      <el-option label="08时" value="08"></el-option>
+      <el-option label="20时" value="20"></el-option>
+    </el-select>
     </div>
   </el-col>
 </el-row>
@@ -99,6 +108,7 @@
 import axios from 'axios';
 import TcInfo from './components/TCinfo_iview.vue';
 import Vue from 'vue';
+import dayjs from 'dayjs';
 import { TClist,moveDirList,regionList,TCRankList,trendList,geoInfo,
 pointInPoly,convertGeoInfo,converDir,converData,fitTyphoon } from './util.js';
 
@@ -133,6 +143,8 @@ export default {
     fitTime:this.fitDate(),
     activeName:'GZ',
     insSelected:'BCGZ',
+    ftpDate:new Date(),
+    ftpHour:(new Date()).getHours>14? '20':'08',
     insList:[
       {value:'BCGZ',cn:'广州',},
       {value:'BABJ',cn:'北京',}
@@ -388,8 +400,49 @@ export default {
           this.TClist.unshift(item);
         }
       })
-    }
-
+    },
+    ftpUpload(){
+      this.$message({message: '正在上传至服务器',type: 'info',duration: 1000});
+      let date='2019040107',enDes='',cnDes='';
+      date = dayjs(this.ftpDate).format('YYYYMMDD') + this.ftpHour;
+      const enBoxList = document.querySelectorAll('.en-message textarea');
+      for(let area of enBoxList){
+        enDes += area.value + '\n';
+      }
+      const cnBoxList = document.querySelectorAll('.cn-message textarea');
+      for(let area of cnBoxList){
+        cnDes += area.value + '\n';
+      }
+      console.log(enDes);
+      console.log(cnDes);
+      const ftpURL = `/fetch/putData?date=2019040107&enDes=${enDes}&cnDes=${cnDes}`;
+      axios.post('/fetch/putData',{
+        date,
+        enDes,
+        cnDes,
+      })
+        .then(res=>{
+          if(res.data.success){
+            this.$notify({
+              title: '上传FTP',
+              message: '台风描述已上传完成',
+              type: 'success',
+              duration:'1000',
+            });
+          }else{
+            throw res.data;
+          }
+        })
+        .catch(err=>{
+          this.$notify({
+            title: '上传台风描述错误',
+            message: err.message,
+            type: 'error',
+            duration:'6000',
+          });
+          console.error(err);
+        })
+    },
   }
 }
 </script>

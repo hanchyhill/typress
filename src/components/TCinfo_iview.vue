@@ -177,7 +177,7 @@
         </el-input>
       </el-col>
     </el-row>
-    <el-row class="messageBox"><!-- 描述框 -->
+    <el-row class="messageBox en-message"><!-- 描述框 -->
       <el-input ref="textEN" :autosize="{ minRows: 2, maxRows: 4}"
       type="textarea" placeholder="请输入内容" name="messageEN"
       v-model="depictEN" >
@@ -185,7 +185,7 @@
       <el-button type="primary" size="small" class="text-item"
       title="copy"  @click="copyText('textEN')">copy</el-button><!-- 复制按钮 -->
     </el-row>
-    <el-row class="messageBox">
+    <el-row class="messageBox cn-message">
       <el-input ref="textCN" type="textarea" autosize placeholder="请输入内容" name="messageCN"
       v-model="depictCN">
       </el-input>
