@@ -77,8 +77,8 @@
       </span>
       <el-button type="success" title="search" icon="search" v-on:click="getData(insSelected)" size="small">查询</el-button>
 
-    <el-button type="success" title="search" icon="search" v-on:click="getBulletin" size="small">低压区/TD (WWJP25)</el-button>
-    <el-button type="primary" title="search" v-on:click="ftpUpload" size="small">上传FTP<i class="el-icon-upload el-icon--right"></i></el-button>
+    <el-button type="success" title="搜索日本报文" icon="search" v-on:click="getBulletin" size="small">低压区/TD (WWJP25)</el-button>
+    <el-button type="primary" title="上传至服务器" v-on:click="ftpUpload" size="small">上传FTP<i class="el-icon-upload el-icon--right"></i></el-button>
     <span class = "time_input">
       <Date-picker v-model="ftpDate"
       type="date"
@@ -144,7 +144,7 @@ export default {
     activeName:'GZ',
     insSelected:'BCGZ',
     ftpDate:new Date(),
-    ftpHour:(new Date()).getHours>14? '2000':'0800',
+    ftpHour:(new Date()).getHours()>14? '2000':'0800',
     insList:[
       {value:'BCGZ',cn:'广州',},
       {value:'BABJ',cn:'北京',}
