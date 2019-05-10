@@ -235,7 +235,7 @@ export default {
       }
     },
     JPaddItem:function(row){
-      console.log(row);
+      // console.log(row);
       if(row.lat>0&&row.lat<25&&row.lon>105&&row.lon<150&&row.rankEN=='TD'){
         this.$notify({
           title: '责任区内包含TD',

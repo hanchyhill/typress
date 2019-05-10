@@ -1579,6 +1579,11 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
+dayjs@^1.8.13:
+  version "1.8.13"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.13.tgz#51b5cdad23ba508bcea939a853b492fefb7fdc47"
+  integrity sha512-JZ01l/PMU8OqwuUs2mOQ/CTekMtoXOUSylfjqjgDzbhRSxpFIrPnHn8Y8a0lfocNgAdBNZb8y0/gbzJ2riQ4WQ==
+
 de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
@@ -1850,6 +1855,11 @@ error-stack-parser@^2.0.0:
   resolved "https://registry.yarnpkg.com/error-stack-parser/-/error-stack-parser-2.0.2.tgz#4ae8dbaa2bf90a8b450707b9149dcabca135520d"
   dependencies:
     stackframe "^1.0.4"
+
+es6-promise@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.6.tgz#b685edd8258886365ea62b57d30de28fadcd974f"
+  integrity sha512-aRVgGdnmW2OiySVPUC9e6m+plolMAJKjZnQlCwNSuK5yQ0JN61DZSO1X1Ufd1foqWRAlig0rhduTCHe7sVtK5Q==
 
 escape-html@~1.0.3:
   version "1.0.3"
