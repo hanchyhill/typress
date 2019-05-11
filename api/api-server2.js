@@ -69,7 +69,7 @@ function start(getTyData) {
           })
           .catch(err=>{
             response.writeHead(503, {"Content-Type": "text/plain"});
-            response.write(err);
+            response.write("连接ftp发生意外");
             response.end();
           })
         // response.write("You've sent: " + content);
