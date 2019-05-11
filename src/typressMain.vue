@@ -1,5 +1,19 @@
 <template>
 <div id="app">
+  <Modal v-model="showTDWarning" width="25%">
+        <p slot="header" style="color:#f60;text-align:center;font-size:20px;">
+            <Icon type="information-circled"></Icon>
+            <span>责任区内包含TD</span>
+        </p>
+        <div style="text-align:center;font-size:15px;" >
+            <p>在责任区内写未发布的TD可能会引起误会</p>
+            <p>是否需要修改为低压区</p>
+        </div>
+        <div slot="footer" style="text-align:center;">
+            <Button type="success" size="large" style="width:200px;" @click="change2low(true)">修改</Button>
+            <Button type="error" size="small" @click="change2low(false)">不修改</Button>
+        </div>
+    </Modal>
   <el-row :gutter="10">
     <el-col :span="1"><div class="grid-content"></div></el-col>
     <el-col :span="23">
@@ -180,6 +194,8 @@ export default {
           }
         ]
       },
+      showTDWarning:false,
+      itemWarning:{},
 	  }
   }
   ,created:function(){
@@ -237,14 +253,26 @@ export default {
     JPaddItem:function(row){
       // console.log(row);
       if(row.lat>0&&row.lat<25&&row.lon>105&&row.lon<150&&row.rankEN=='TD'){
+        this.itemWarning = Object.assign({},row);
+        this.showTDWarning = true;
         this.$notify({
           title: '责任区内包含TD',
           message: '请检查是否需要把强度修改为低压区',
           type: 'error',
           duration:'6000',
         });
+      }else{
+        this.addNewItem(row);
       }
-      this.addNewItem(row);
+    },
+    change2low(change=true){
+      if(change){
+        this.itemWarning.rankEN='LOW PRESSURE AREA';
+      }else{
+        '';
+      }
+      this.addNewItem(this.itemWarning);
+      this.showTDWarning = !this.showTDWarning;
     }
 ////////////////查询广州报文////////////////
     ,getData:function(ins='BCGZ'){
