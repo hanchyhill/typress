@@ -252,7 +252,7 @@ export default {
     },
     JPaddItem:function(row){
       // console.log(row);
-      if(row.lat>0&&row.lat<25&&row.lon>105&&row.lon<150&&row.rankEN=='TD'){
+      if(row.lat>0&&row.lat<50&&row.lon>105&&row.lon<150.1&&row.rankEN=='TD'){
         this.itemWarning = Object.assign({},row);
         this.showTDWarning = true;
         this.$notify({
