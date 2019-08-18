@@ -1,6 +1,6 @@
 {
   "name": "typress",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "depict typhoon info. ",
   "author": "Pchy Hill <healthhan@qq.com>",
   "private": true,
@@ -17,6 +17,7 @@
     "es6-promise": "^4.2.6",
     "iview": "^2.0.0-rc.9",
     "lodash": "^4.17.4",
+    "mysql2": "^1.6.5",
     "promise-request": "^0.1.2",
     "vue": "^2.2.2",
     "vue-router": "^2.3.0"
