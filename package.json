@@ -16,7 +16,7 @@
     "element-ui": "^1.2.7",
     "es6-promise": "^4.2.6",
     "iview": "^2.0.0-rc.9",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "mysql2": "^1.6.5",
     "promise-request": "^0.1.2",
     "vue": "^2.2.2",
