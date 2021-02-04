@@ -2,6 +2,10 @@
 
 > depict typhoon info. 
 
+台风描述程序
+
+依赖 Node.js > 10.0; NPM; Yarn
+
 ## Build Setup
 
 ``` bash
