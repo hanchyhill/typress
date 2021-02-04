@@ -1,6 +1,17 @@
 var http=require('http');
-
-
+const privateConfig = require('./config/private.config.json');
+const ideaConfig = {
+  username:'',
+  password:'',
+}
+if (process.env.NODE_ENV === 'production') {
+  ideaConfig.username = privateConfig.production.IDEA.username;
+  ideaConfig.password = privateConfig.production.IDEA.password;
+  } else {
+  ideaConfig.username = privateConfig.development.IDEA.username;
+  ideaConfig.password = privateConfig.development.IDEA.password;
+}
+console.log(ideaConfig);
 function getTyData(response,sTime,eTime,interface,ins='BCGZ'){
 
 //get 请求外网
@@ -26,13 +37,13 @@ function getTyData(response,sTime,eTime,interface,ins='BCGZ'){
   var dataURL = ""
   if(interface == "getInfo"){
 
-    dataURL = 'http://172.22.1.175/di/http.action?userId=sqxt&pwd=shengqxt123&interfaceId=getRACTyphoonInfo&dataFormat=json';
+    dataURL = `http://172.22.1.175/di/http.action?userId=${ideaConfig.username}&pwd=${ideaConfig.password}&interfaceId=getRACTyphoonInfo&dataFormat=json`;
     //dataURL = 'http://172.22.1.175/kk';
     //console.log(dataURL);
   }
   else if(interface == "getObs"){
 
-    dataURL = 'http://172.22.1.175/di/http.action?userId=sqxt&pwd=shengqxt123&interfaceId=getRACTyphoonObsTimeRange&dataFormat=json&s_ymdhms='+
+    dataURL = `http://172.22.1.175/di/http.action?userId=${ideaConfig.username}&pwd=${ideaConfig.password}&interfaceId=getRACTyphoonObsTimeRange&dataFormat=json&s_ymdhms=`+
                 sTime + '000000&e_ymdhms=' + eTime + '235900&fcid='+ins;
     //dataURL = 'http://172.22.1.175/kk';
     //console.log(dataURL);
